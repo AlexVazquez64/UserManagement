@@ -55,7 +55,7 @@ Reemplaza `TU_DIRECCION_IP` con la dirección IP que obtuviste en el paso anteri
 
 ### 6. Iniciar el Backend (C# .NET Core)
 
-Abre una nueva terminal (no la de Docker Quickstart) y navega a la carpeta `UserManagement.API`. Luego, ejecuta el siguiente comando para iniciar el backend:
+Abre una nueva terminal (no la de Docker Quickstart) y navega a la carpeta `UserManagementAPI`. Luego, ejecuta el siguiente comando para iniciar el backend:
 
 ```bash
 dotnet run

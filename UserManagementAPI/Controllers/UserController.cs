@@ -1,57 +1,65 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UserManagement.API.Data; // Asegúrate de tener la referencia correcta
-using UserManagement.API.Models;
+using UserManagementAPI.Models;
+using UserManagementAPI.Services;
 
-namespace UserManagement.API.Controllers;
+namespace UserManagementAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")] // La ruta será /api/users
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-  private readonly AppDbContext _context;
+  private readonly IUserService _userService; // Inyectamos la interfaz
 
-  public UserController(AppDbContext context)
+  public UserController(IUserService userService) // Modificamos el constructor
   {
-    _context = context;
+    _userService = userService;
   }
 
-  // GET: api/users
   [HttpGet]
-  public ActionResult<IEnumerable<User>> GetUsers()
+  public async Task<ActionResult<IEnumerable<User>>> GetUsers()
   {
-    // Lógica para obtener todos los usuarios
-    throw new NotImplementedException(); // Implementaremos esto más adelante
+    var users = await _userService.GetAllUsersAsync();
+    return Ok(users);
   }
 
-  // GET: api/users/5
+  // [Authorize] // Requiere autenticación para acceder a este endpoint
+  // GET: api/User/5
   [HttpGet("{id}")]
-  public ActionResult<User> GetUser(int id)
+  public async Task<ActionResult<User>> GetUser(int id)
   {
-    // Lógica para obtener un usuario por ID
-    throw new NotImplementedException();
+    var user = await _userService.GetUserByIdAsync(id);
+    return user == null ? NotFound() : Ok(user);
   }
 
-  // POST: api/users
+  // POST: api/User
   [HttpPost]
-  public ActionResult<User> CreateUser(User user)
+  public async Task<ActionResult<User>> CreateUser(User user)
   {
-    // Lógica para crear un nuevo usuario
-    throw new NotImplementedException();
+    Console.WriteLine($"User");
+    
+    var createdUser = await _userService.CreateUserAsync(user);
+    return CreatedAtAction(nameof(GetUser), new { id = createdUser.Id }, createdUser);
   }
 
-  // PUT: api/users/5
+  // [Authorize] // Requiere autenticación para acceder a este endpoint
+  // PUT: api/User/5
   [HttpPut("{id}")]
-  public IActionResult UpdateUser(int id, User user)
+  public async Task<IActionResult> UpdateUser(int id, User user)
   {
-    // Lógica para actualizar un usuario existente
-    throw new NotImplementedException();
+    if (id != user.Id)
+      return BadRequest();
+
+    await _userService.UpdateUserAsync(user);
+    return NoContent();
   }
 
-  // DELETE: api/users/5
+  // [Authorize] // Requiere autenticación para acceder a este endpoint
+  // DELETE: api/User/5
   [HttpDelete("{id}")]
-  public IActionResult DeleteUser(int id)
+  public async Task<IActionResult> DeleteUser(int id)
   {
-    // Lógica para eliminar un usuario
-    throw new NotImplementedException();
+    await _userService.DeleteUserAsync(id);
+    return NoContent();
   }
 }

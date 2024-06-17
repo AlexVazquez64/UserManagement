@@ -1,0 +1,28 @@
+<p>user-list works!</p>
+<div class="user-list-container">
+  <h2>Lista de Usuarios</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre de Usuario</th>
+        <th>Correo Electrónico</th>
+        <th>Acciones</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button (click)="editUser(user)">Editar</button>
+          <button (click)="deleteUser(user)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="createUser()">Crear Nuevo Usuario</button>
+</div>
