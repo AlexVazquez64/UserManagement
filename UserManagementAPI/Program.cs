@@ -19,6 +19,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // 	options.HeaderName = "X-XSRF-TOKEN"; // Nombre del encabezado para el token
 // });
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: MyAllowSpecificOrigins,
+										policy =>
+										{
+											policy.WithOrigins("http://localhost:4200")
+																.AllowAnyHeader()
+																.AllowAnyMethod()
+																.AllowCredentials();
+										});
+});
 
 builder.Services.AddControllers();
 
@@ -41,8 +53,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
+
+app.UseCors(MyAllowSpecificOrigins); // Habilitar CORS
 
 // Configure the HTTP request pipeline.›
 if (app.Environment.IsDevelopment())
