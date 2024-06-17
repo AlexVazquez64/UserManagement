@@ -55,17 +55,41 @@ Reemplaza `TU_DIRECCION_IP` con la dirección IP que obtuviste en el paso anteri
 
 ### 6. Iniciar el Backend (C# .NET Core)
 
-Abre una nueva terminal (no la de Docker Quickstart) y navega a la carpeta `UserManagementAPI`. Luego, ejecuta el siguiente comando para iniciar el backend:
+   Abre una nueva terminal (no la de Docker Quickstart) y navega a la carpeta `UserManagementAPI`. Luego, ejecuta el siguiente comando para iniciar el backend:
 
-```bash
-dotnet run
-```
+   ```bash
+   dotnet run
+   ```
 
 El backend se iniciará y estará escuchando en `http://localhost:5000` (o en el puerto que hayas configurado).
 
 ### 7. Iniciar el Frontend (Angular)
 
-**Próximamente:** Las instrucciones para iniciar el frontend se agregarán aquí una vez que hayamos desarrollado esa parte del proyecto.
+1. **Navegar al Proyecto Frontend:**
+
+   Abre una nueva terminal y navega a la carpeta del proyecto Angular:
+
+   ```bash
+   cd UserManagement.App
+   ```
+
+2. **Instalar Dependencias:**
+
+   Instala las dependencias del proyecto:
+
+   ```bash
+   npm install
+   ```
+
+3. **Iniciar el Servidor de Desarrollo:**
+
+   Ejecuta el siguiente comando para iniciar el servidor de desarrollo de Angular:
+
+   ```bash
+   ng serve
+   ```
+
+   La aplicación estará disponible en `http://localhost:4200/`.
 
 ## Contribuciones
 
@@ -74,6 +98,6 @@ El backend se iniciará y estará escuchando en `http://localhost:5000` (o en el
 ## Versiones
 
 * **.NET Core:** 6.0
-* **Angular:** (Se especificará una vez que se desarrolle el frontend)
+* **Angular:** 18.2.0
 * **Entity Framework Core:** 6.0.21
 * **SQL Server:** 2019 (utilizando Docker)
