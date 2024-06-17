@@ -44,7 +44,7 @@ La salida de este comando te mostrará la dirección IP, por ejemplo: `192.168.9
 
 ### 5. Configurar la Conexión a la Base de Datos
 
-1. Abre el archivo `appsettings.json` en la carpeta `UserManagement.API`.
+1. Abre el archivo `appsettings.json` en la carpeta `UserManagementAPI`.
 2. Modifica la cadena de conexión `DefaultConnection` de la siguiente manera:
 
    ```json
